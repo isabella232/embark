@@ -32,10 +32,12 @@ export default class DebuggerManager {
       this.isDebugging = true;
 
       cmdLine.startDebug(txHash, filename, () => {
-        if (cb) {
-          cmdLine.triggerSourceUpdate();
-          cb();
+        if (!cb) {
+          return;
         }
+
+        cmdLine.triggerSourceUpdate();
+        cb();
       });
     });
     return cmdLine;

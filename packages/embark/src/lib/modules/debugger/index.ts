@@ -45,6 +45,7 @@ class TransactionDebugger {
 
   private listenToEvents() {
     this.embark.events.on("blockchain:tx", (tx: any) => {
+      console.dir(tx);
       this.embark.events.request("contracts:contract", tx.name, (contract: any) => {
         this.txTracker[tx.transactionHash] = {tx, contract};
         this.lastTx = tx.transactionHash;
@@ -248,7 +249,7 @@ class TransactionDebugger {
         }
         this.currentCmdTxHash = this.lastTx;
         const filename: string = this.txTracker[this.lastTx].contract.filename;
-        startDebug(txHash, filename, callback);
+        startDebug(this.lastTx, filename, callback);
       },
       usage: "debug <txHash>",
     });
