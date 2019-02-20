@@ -63,7 +63,7 @@ module.exports = async (embark) => {
 
   web3Location = web3Location.replace(/\\/g, '/');
 
-  embark.events.emit('runcode:register', '__Web3', require(web3Location), true, async () => {
+  embark.events.emit('runcode:register', '__Web3', require(web3Location), async () => {
     const symlinkLocation = await generateSymlink(embark, web3Location);
 
     let code = `\nconst Web3 = global.__Web3 || require('${symlinkLocation}');`;

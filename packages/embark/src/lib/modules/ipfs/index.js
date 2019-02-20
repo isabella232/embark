@@ -113,7 +113,7 @@ class IPFS {
             return this.logger.error(err.message || err);
           }
 
-          this.events.emit('runcode:register', 'IpfsApi', require('ipfs-api'), true, () => {
+          this.events.emit('runcode:register', 'IpfsApi', require('ipfs-api'), () => {
             let code = `\nconst IpfsApi = global.IpfsApi || require('${symlinkDest}');`;
             code += "\n" + this.fs.readFileSync(utils.joinPath(__dirname, 'embarkjs.js')).toString();
             code += "\nEmbarkJS.Storage.registerProvider('ipfs', __embarkIPFS);";

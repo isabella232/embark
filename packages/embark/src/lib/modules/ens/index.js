@@ -378,7 +378,7 @@ class ENS {
             this.logger.error(__('Error creating a symlink to eth-ens-namehash'));
             return this.logger.error(err.message || err);
           }
-          this.events.emit('runcode:register', 'namehash', require('eth-ens-namehash'), true, () => {
+          this.events.emit('runcode:register', 'namehash', require('eth-ens-namehash'), () => {
             let code = `\nconst namehash = global.namehash || require('${symlinkDest}');`;
             code += this.fs.readFileSync(utils.joinPath(__dirname, 'ENSFunctions.js')).toString();
             code += "\n" + this.fs.readFileSync(utils.joinPath(__dirname, 'embarkjs.js')).toString();
